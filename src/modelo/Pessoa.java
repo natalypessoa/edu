@@ -8,7 +8,7 @@ public class Pessoa {
     private String nome;
     private String cpf;
     private int idade;
-    private  String Email;
+    private  String email;
     private  int telefone;
     
     // Construtor padrão
@@ -17,13 +17,13 @@ public class Pessoa {
     }
 
     // Construtor completo (sem id)
-    public Pessoa(String nome, String cpf, int idade, string Email, int telefone) {
+    public Pessoa(String nome, String cpf, int idade, String email, int telefone) {
         this.id = ++contador;
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
-        this.Email= Email;
-        this.telefone = telefone 
+        this.email = email;
+        this.telefone = telefone; 
     }
 
     // Construtor só com id (para pesquisa)
@@ -35,6 +35,11 @@ public class Pessoa {
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getNome() {
         return nome;
@@ -59,11 +64,11 @@ public class Pessoa {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-     public string getEmail() {
-         return Emial;
+     public String getEmail() {
+         return email;
      }
-     public void setEmail() {
-         this.Email=Email;
+     public void setEmail( String email) {
+         this.email= email;
      }
     public int gettelefone() {
         return telefone;
@@ -75,13 +80,12 @@ public class Pessoa {
  
     @Override
     public String toString() {
-        return "id=" + id +
-               ", nome='" + nome + '\'' +
-               ", cpf='" + cpf + '\'' +
-               ", idade=" + idade + '\'' +
-               ", Email=" + Email + '\'' +
-               ", telefone=" + telefone ;
+        return "| Id: " + id +
+               "| Nome: '" + nome + '\'' +
+               "| Cpf: " + cpf + '\'' +
+               "| Idade: " + idade + '\'' +
+               "| Email: " + email + '\'' +
+               "| Telefone: " + telefone ;
     }
 }
-
     
