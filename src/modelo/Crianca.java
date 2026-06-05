@@ -6,18 +6,19 @@ public class Crianca extends Pessoa {
     private String turma;
     private String turno;
     private String curso;
-    
+    private Responsavel responsavel;
  
     public Crianca() {
         super();
     }
 
-    public Crianca(String nome, String cpf, int idade,
+    public Crianca(String nome, String cpf, int idade, Responsavel responsavel,
                    String turma, String turno, String curso) {
         super(nome, cpf, idade);
         this.turma = turma;
         this.turno = turno;
         this.curso = curso;
+        this.responsavel= responsavel;
 
     }
  
@@ -48,12 +49,22 @@ public class Crianca extends Pessoa {
     public void setCurso(String curso) {
         this.curso = curso;
     }
+     public Responsavel getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Responsavel responsavel) {
+        this.responsavel = responsavel;
+    }
+
+  
     
     @Override
     public String toString() {
         return super.toString()
                 + " | Turma: " + turma
                 + " | Turno: " + turno
-                + "| Curso: " + curso;
+                + "| Curso: " + curso;   
+                + "| responsavel " + responsavel; 
     }
 }
