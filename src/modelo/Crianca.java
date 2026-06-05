@@ -64,7 +64,7 @@ public class Crianca extends Pessoa {
         return super.toString()
                 + " | Turma: " + turma
                 + " | Turno: " + turno
-                + "| Curso: " + curso;   
+                + "| Curso: " + curso   
                 + "| responsavel " + responsavel; 
     }
 }
