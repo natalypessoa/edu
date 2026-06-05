@@ -8,8 +8,8 @@ public class Responsavel extends Pessoa {
     }
 
     // Construtor completo (sem id)
-    public Responsavel(String nome, String cpf, int idade) {
-        super(nome, cpf, idade);
+    public Responsavel(String nome, String cpf, int idade, String email, int telefone) {
+        super(nome, cpf, idade, email, telefone);
     }
 
     // Construtor só com id (para pesquisa)
@@ -22,3 +22,4 @@ public class Responsavel extends Pessoa {
         return "Responsavel{" + super.toString() + '}';
     }
 }
+
