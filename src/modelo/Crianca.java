@@ -1,13 +1,12 @@
-
 package modelo;
- 
+
 public class Crianca extends Pessoa {
- 
+
     private String turma;
     private String turno;
     private String curso;
     private Responsavel responsavel;
- 
+
     public Crianca() {
         super();
     }
@@ -18,10 +17,9 @@ public class Crianca extends Pessoa {
         this.turma = turma;
         this.turno = turno;
         this.curso = curso;
-        this.responsavel= responsavel;
-
+        this.responsavel = responsavel;
     }
- 
+
     public Crianca(int id) {
         super(id);
     }
@@ -49,7 +47,8 @@ public class Crianca extends Pessoa {
     public void setCurso(String curso) {
         this.curso = curso;
     }
-     public Responsavel getResponsavel() {
+
+    public Responsavel getResponsavel() {
         return responsavel;
     }
 
@@ -57,14 +56,12 @@ public class Crianca extends Pessoa {
         this.responsavel = responsavel;
     }
 
-  
-    
     @Override
     public String toString() {
         return super.toString()
                 + " | Turma: " + turma
                 + " | Turno: " + turno
-                + "| Curso: " + curso   
-                + "| responsavel " + responsavel; 
+                + " | Curso: " + curso
+                + " | Responsavel: " + responsavel;
     }
 }
