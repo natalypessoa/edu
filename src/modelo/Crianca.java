@@ -1,9 +1,10 @@
+
 package modelo;
 public class Crianca extends Pessoa {
  
     
     private static int contador = 0;
-    private int id;
+    private int matricula;
     private String turma;
     private String turno;
     private String curso;
@@ -12,7 +13,7 @@ public class Crianca extends Pessoa {
 
     public Crianca(String nome, String cpf, int idade,String gmail,String turma, String turno, String curso,Responsavel responsavel) {
         super(nome, cpf, idade,gmail);
-        this.id = ++contador;
+        this.matricula = ++contador;
         this.turma = turma;
         this.turno = turno;
         this.curso = curso;
@@ -22,8 +23,8 @@ public class Crianca extends Pessoa {
     
     
 
-    public int getId() {
-        return id;
+    public int getMatricula() {
+        return matricula;
     }
  
     public String getTurma() {
@@ -60,6 +61,6 @@ public class Crianca extends Pessoa {
   
     
     @Override
-    public String toString() {return "ALUNO: "+super.toString()+ " Turma: " + turma+ " Turno: " + turno+ " Curso: " + curso+" ID: "+id; }
+    public String toString() {return "ALUNO: "+super.toString()+ " Turma: " + turma+ " Turno: " + turno+ " Curso: " + curso+" Matricula: "+matricula; }
 }
 
