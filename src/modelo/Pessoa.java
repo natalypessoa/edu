@@ -1,7 +1,8 @@
 package modelo;
 
 public abstract class Pessoa {
-
+    private static int contador = 0;
+    private int id;
     private String gmail;
     private String nome;
     private String cpf;
@@ -11,11 +12,14 @@ public abstract class Pessoa {
     // Construtor padrão
     public Pessoa(String nome, String cpf, int idade,String gmail) {
     this.nome = nome;
+    this.id = ++contador;
     this.gmail = gmail;
     this.cpf = cpf;
     this.idade = idade;
     }
-    
+     public int getid() {
+        return id;
+    }
     public String getGmail() {
         return gmail;
     }
@@ -52,9 +56,8 @@ public abstract class Pessoa {
  
     
 @Override
-    public String toString() {return nome + " CPF: " + cpf +" IDADE: " + idade+" GMAIL: "+gmail;}
+    public String toString() {return nome + " CPF: " + cpf +" IDADE: " + idade+" GMAIL: "+gmail+" ID: "+id;}
 }
 
     
 
-    
