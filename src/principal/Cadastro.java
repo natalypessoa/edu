@@ -82,7 +82,8 @@ public class Cadastro {
                    System.out.print("Digite o telefone:");
                    String telefone;
                    telefone = scanner.next();
-                   scanner.nextLine(); // limpa o buffer
+                   scanner.nextLine();
+                  
                    
                     System.out.println("==============================================================================");
                     
@@ -177,7 +178,7 @@ public class Cadastro {
                     switch (opcao3) {
                         case 1:System.out.println("==============================================================================");
                         System.out.println("                        ----- Atualizar responsavel-----");
-                        System.out.print("Digite o id do aluno vinculado ao responsavel");
+                        System.out.print("Digite a matricula do aluno vinculado ao responsavel");
                         int idaluno = scanner.nextInt();
                         scanner.nextLine();
                         String nome;
@@ -227,7 +228,7 @@ public class Cadastro {
                             
                         case 2:System.out.println("==============================================================================");
                     System.out.println("                        -----Atualizar aluno-----");
-                        System.out.print("Digite o id do aluno: ");
+                        System.out.print("Digite a matricula do aluno: ");
                         String nome2;
                         int idaluno2 = scanner.nextInt();
                         scanner.nextLine(); 
@@ -292,7 +293,7 @@ public class Cadastro {
                     System.out.println("==============================================================================");
                     System.out.println("                        ----- PROCURAR ALUNOS-----");
                     System.out.println("1) PROCURAR ALUNOS por CPF");
-                    System.out.println("2) PROCURAR ALUNOS por id");
+                    System.out.println("2) PROCURAR ALUNOS por matricula");
                     System.out.print("Escolha: ");
                     
                     int opcao2 = scanner.nextInt();
@@ -309,7 +310,7 @@ public class Cadastro {
                             break;
                         case 2:System.out.println("==============================================================================");
                     System.out.println("                        ----- PROCURAR ALUNOS por id-----");
-                        System.out.print("Digite o id do aluno para busca: ");
+                        System.out.print("Digite a matricula do aluno para busca: ");
                         int idBusca = scanner.nextInt();
                         System.out.println("------------------------------------------------------------------------------");
                         bancoDados.buscarAlunoPorid(idBusca);
@@ -333,7 +334,7 @@ public class Cadastro {
                     scanner.nextLine();
                     
                     switch (opcaodeletar){
-                        case 1:System.out.print("Digite o ID do aluno que deseja excluir: ");
+                        case 1:System.out.print("Digite a matricula do aluno que deseja excluir: ");
                         int id = scanner.nextInt();
 
                         if (bancoDados.excluirAluno(id)) {
