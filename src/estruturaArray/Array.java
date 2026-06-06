@@ -37,9 +37,9 @@ public class Array {
         }
     }
     
-    public boolean atualizarAluno(int id,String nome, String cpf, int idade,String gmail,String turma, String turno, String curso) {
+    public boolean atualizarAluno(int matricula,String nome, String cpf, int idade,String gmail,String turma, String turno, String curso) {
     for (int i = 0; i < contCriancas; i++) {
-        if (criancas[i].getId() == id) {
+        if (criancas[i].getMatricula() == matricula) {
             criancas[i].setNome(nome);
             criancas[i].setCpf(cpf);
             criancas[i].setIdade(idade);            
@@ -56,11 +56,11 @@ public class Array {
     return false;
 }
     
-    public boolean excluirAluno(int idAluno) {
+    public boolean excluirAluno(int matriculaAluno) {
 
     for (int i = 0; i < contCriancas; i++) {
 
-        if (criancas[i].getId() == idAluno) {
+        if (criancas[i].getMatricula() == matriculaAluno) {
 
             Responsavel resp = criancas[i].getResponsavel();
 
@@ -135,12 +135,12 @@ public class Array {
         }
     }
     
-public boolean atualizarResponsavel(int idAluno, String nome, String cpf,
+public boolean atualizarResponsavel(int matriculaAluno, String nome, String cpf,
                                     int idade, String gmail, String telefone) {
 
     for (int i = 0; i < contCriancas; i++) {
 
-        if (criancas[i].getId() == idAluno) {
+        if (criancas[i].getMatricula() == matriculaAluno) {
 
             Responsavel resp = criancas[i].getResponsavel();
 
@@ -179,9 +179,9 @@ public boolean atualizarResponsavel(int idAluno, String nome, String cpf,
         // Se o for terminar e não der o return, significa que não achou:
         System.out.println("Aluno com o CPF " + cpfBusca + " não foi encontrado.");
     }
-        public void buscarAlunoPorid(int idBusca) {
+        public void buscarAlunoPorid(int MatriculaBusca) {
         for (int i = 0; i < contCriancas; i++) {
-            if (criancas[i].getId() == idBusca){
+            if (criancas[i].getMatricula() == MatriculaBusca){
                 System.out.println("\n[Aluno Encontrado!]");
                 System.out.println("Dados: " + criancas[i]);
                 
@@ -193,6 +193,6 @@ public boolean atualizarResponsavel(int idAluno, String nome, String cpf,
             }
         }
         // Se o for terminar e não der o return, significa que não achou:
-        System.out.println("Aluno com o id " + idBusca + " não foi encontrado.");
+        System.out.println("Aluno com a Matricula " + MatriculaBusca + " não foi encontrado.");
     }
 }
