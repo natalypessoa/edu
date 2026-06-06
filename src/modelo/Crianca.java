@@ -1,29 +1,31 @@
 package modelo;
-
 public class Crianca extends Pessoa {
-
+ 
+    
+    private static int contador = 0;
+    private int id;
     private String turma;
     private String turno;
     private String curso;
     private Responsavel responsavel;
+    
 
-    public Crianca() {
-        super();
-    }
-
-    public Crianca(String nome, String cpf, int idade, String Email, int telefone,
-                   Responsavel responsavel, String turma, String turno, String curso) {
-        super(nome, cpf, idade, Email, telefone);
+    public Crianca(String nome, String cpf, int idade,String gmail,String turma, String turno, String curso,Responsavel responsavel) {
+        super(nome, cpf, idade,gmail);
+        this.id = ++contador;
         this.turma = turma;
         this.turno = turno;
         this.curso = curso;
-        this.responsavel = responsavel;
-    }
+        this.responsavel= responsavel;
 
-    public Crianca(int id) {
-        super(id);
     }
+    
+    
 
+    public int getId() {
+        return id;
+    }
+ 
     public String getTurma() {
         return turma;
     }
@@ -47,8 +49,7 @@ public class Crianca extends Pessoa {
     public void setCurso(String curso) {
         this.curso = curso;
     }
-
-    public Responsavel getResponsavel() {
+     public Responsavel getResponsavel() {
         return responsavel;
     }
 
@@ -56,12 +57,9 @@ public class Crianca extends Pessoa {
         this.responsavel = responsavel;
     }
 
+  
+    
     @Override
-    public String toString() {
-        return super.toString()
-                + " | Turma: " + turma
-                + " | Turno: " + turno
-                + " | Curso: " + curso
-                + " | Responsavel: " + responsavel;
-    }
+    public String toString() {return "ALUNO: "+super.toString()+ " Turma: " + turma+ " Turno: " + turno+ " Curso: " + curso+" ID: "+id; }
 }
+
