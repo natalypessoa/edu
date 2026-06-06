@@ -1,25 +1,22 @@
 package modelo;
 
 public class Responsavel extends Pessoa {
-
-    // Construtor padrão
-    public Responsavel() {
-        super();
+private String telefone;
+    public Responsavel(String nome, String cpf, int idade,String gmail,String telefone) {
+        super(nome, cpf, idade,gmail);
+        this.telefone = telefone;
     }
 
-    // Construtor completo (sem id)
-    public Responsavel(String nome, String cpf, int idade, String email, int telefone) {
-        super(nome, cpf, idade, email, telefone);
+    public String getTelefone() {
+        return telefone;
     }
 
-    // Construtor só com id (para pesquisa)
-    public Responsavel(int id) {
-        super(id);
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override
-    public String toString() {
-        return "Responsavel{" + super.toString() + '}';
+    public String toString() {return  "RESPONSAVEL: "+super.toString()+" telefone:" + telefone;
     }
 }
 
