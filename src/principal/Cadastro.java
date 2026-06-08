@@ -1,301 +1,309 @@
 package principal;
+
 import estruturaArray.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import modelo.*;
+
 public class Cadastro {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int opcao;
         Array bancoDados = new Array();
-        
+
         // Dados de teste iniciais
         Responsavel respTeste = new Responsavel("Jane Cristina da Silva", "321.321.234-12", 19, "jan@gmail.com", "1112345");
-        bancoDados.inserirResponsavel(respTeste);            
+        bancoDados.inserirResponsavel(respTeste);
         Crianca criancaTeste = new Crianca("Pedro Silva", "123.123.123-12", 12, "pedr@gmail.com", "3B", "Manha", "Ciencias", respTeste);
-        bancoDados.inserirCrianca(criancaTeste); 
-                   
+        bancoDados.inserirCrianca(criancaTeste);
+
         while (true) {
-            System.out.println("==============================================================================");
-            System.out.println("                                ----- SISTEMA -----");
-            System.out.println("1) Cadastrar");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("2) ver responsaveis por aluno");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("3) ver alunos");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("4) atualizar");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("5) procurar aluno");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("6) excluir");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("0) sair");
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.print("  Escolha: ");
-            
-            opcao = scanner.nextInt();
-            scanner.nextLine(); 
-            switch (opcao) {
-                case 0:
-                    System.out.println("Encerrando sistema...");
-                    scanner.close();
-                    return;
+            try {
+                System.out.println("==============================================================================");
+                System.out.println("                                ----- SISTEMA -----");
+                System.out.println("1) Cadastrar");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("2) ver responsaveis por aluno");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("3) ver alunos");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("4) atualizar");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("5) procurar aluno");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("6) excluir");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("0) sair");
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.print("  Escolha: ");
 
-                case 1:
-                    System.out.println("==============================================================================");
-                    
-                    // --- DADOS DO RESPONSÁVEL ---
-                    String nomeresponsavel = lerNomeCompleto(scanner, "Nome completo do responsável: ");
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcao) {
+                    case 0:
+                        System.out.println("Encerrando sistema...");
+                        scanner.close();
+                        return;
 
-                    int idaderesponsavel;
-                    do {
-                        System.out.print("Idade do responsável: ");
-                        idaderesponsavel = scanner.nextInt();
-                        scanner.nextLine();
-                        if (idaderesponsavel < 18) {
-                            System.out.println("Responsável deve ter 18 anos ou mais.");
-                        }
-                    } while (idaderesponsavel < 18);
+                    case 1:
+                        System.out.println("==============================================================================");
 
-                    System.out.println("------------------------------------------------------------------------------");
+                        // --- DADOS DO RESPONSÁVEL ---
+                        String nomeresponsavel = lerNomeCompleto(scanner, "Nome completo do responsável: ");
 
-                    String cpfresponsavel = lerCpfCompleto(scanner, "CPF do responsável (formato XXX.XXX.XXX-XX): ");
-                    
-                    System.out.println("------------------------------------------------------------------------------");
-
-                    System.out.print("Digite o gmail: ");
-                    String gmail = scanner.nextLine().trim();
-                    
-                    System.out.println("------------------------------------------------------------------------------");
-                    
-                    System.out.print("Digite o telefone: ");
-                    String telefone = scanner.nextLine().trim();
-                   
-                    System.out.println("==============================================================================");
-                    
-                    // --- DADOS DA CRIANÇA ---
-                    String nomecrianca = lerNomeCompleto(scanner, "Nome completo da criança: ");
-
-                    int idadecrianca;
-                    do {
-                        System.out.print("Idade da criança: ");
-                        idadecrianca = scanner.nextInt();
-                        scanner.nextLine();
-                        if (idadecrianca < 0 || idadecrianca > 17) {
-                            System.out.println("Idade inválida! Digite entre 0 e 17.");
-                        }
-                    } while (idadecrianca < 0 || idadecrianca > 17);
-
-                    String cpfcrianca = lerCpfCompleto(scanner, "CPF da criança (formato XXX.XXX.XXX-XX): ");
-                    
-                    System.out.println("------------------------------------------------------------------------------");
-
-                    // --- CURSO (escolha por menu) ---
-                    String curso = escolherCurso(scanner);
-
-                    System.out.println("------------------------------------------------------------------------------");
-
-                    // --- TURNO (escolha por menu) ---
-                    String turno = escolherTurno(scanner);
-
-                    System.out.println("------------------------------------------------------------------------------");
-
-                    // --- TURMA (gerada a partir do curso e turno) ---
-                    String turma = escolherTurma(scanner, turno, curso);
-
-                    System.out.println("------------------------------------------------------------------------------");
-
-                    System.out.print("Digite o gmail do aluno: ");
-                    String gmail2 = scanner.nextLine().trim();
-                    
-                    System.out.println("==============================================================================");
-
-                    // --- INSTANCIAÇÃO E SALVAMENTO ---
-                    Responsavel novoResp = new Responsavel(nomeresponsavel, cpfresponsavel, idaderesponsavel, gmail, telefone);
-                    bancoDados.inserirResponsavel(novoResp);
-                    
-                    Crianca novaCrianca = new Crianca(nomecrianca, cpfcrianca, idadecrianca, gmail2, turma, turno, curso, novoResp);
-                    bancoDados.inserirCrianca(novaCrianca);
-
-                    System.out.println("Nome do Aluno: " + novaCrianca);
-                    System.out.println("------------------------------------------------------------------------------");
-                    System.out.println("Nome do Responsável: " + novoResp);                    
-                    System.out.println("==============================================================================");
-                    System.out.println("\nAluno e Responsável cadastrados com sucesso!");
-                    break;
-                    
-                case 2:
-                    System.out.println("==============================================================================");
-                    System.out.println("                ----- RESPONSÁVEIS POR ALUNO CADASTRADOS -----");
-                    bancoDados.exibirResponsaveisPorAluno(); 
-                    break;
-
-                case 3:
-                    System.out.println("==============================================================================");
-                    System.out.println("                        ----- ALUNOS CADASTRADOS -----");
-                    bancoDados.exibirCriancas();
-                    break;
-
-                case 4:
-                    System.out.println("==============================================================================");
-                    System.out.println("                        -----ATUALIZAR-----");
-                    System.out.println("1) Atualizar responsavel");
-                    System.out.println("2) Atualizar aluno");
-                    System.out.print("Escolha: ");
-                    
-                    int opcao3 = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (opcao3) {
-                        case 1:
-                            System.out.println("==============================================================================");
-                            System.out.println("                        ----- Atualizar responsavel -----");
-                            System.out.print("Digite a matricula do aluno vinculado ao responsavel: ");
-                            int idaluno = scanner.nextInt();
+                        int idaderesponsavel;
+                        do {
+                            System.out.print("Idade do responsável: ");
+                            idaderesponsavel = scanner.nextInt();
                             scanner.nextLine();
-
-                            String nomeResp = lerNomeCompleto(scanner, "Novo nome completo do responsável: ");
-                            String cpfRs = lerCpfCompleto(scanner, "Novo CPF do responsável (formato XXX.XXX.XXX-XX): ");
-
-                            int idade;
-                            do {
-                                System.out.print("Nova idade do responsável: ");
-                                idade = scanner.nextInt();
-                                scanner.nextLine();
-                                if (idade < 18) {
-                                    System.out.println("Responsável deve ter 18 anos ou mais.");
-                                }
-                            } while (idade < 18);
-
-                            System.out.print("Novo Gmail: ");
-                            String novogmail = scanner.nextLine();
-
-                            System.out.print("Novo telefone: ");
-                            String novotelefone = scanner.nextLine();
-
-                            boolean atualizado = bancoDados.atualizarResponsavel(
-                                idaluno, nomeResp, cpfRs, idade, novogmail, novotelefone);
-
-                            if (atualizado) {
-                                System.out.println("Responsável atualizado com sucesso!");
-                            } else {
-                                System.out.println("Aluno não encontrado ou sem responsável vinculado.");
+                            if (idaderesponsavel < 18) {
+                                System.out.println("Responsável deve ter 18 anos ou mais.");
                             }
-                            break;
-                            
-                        case 2:
-                            System.out.println("==============================================================================");
-                            System.out.println("                        ----- Atualizar aluno -----");
-                            System.out.print("Digite a matricula do aluno: ");
-                            int idaluno2 = scanner.nextInt();
+                        } while (idaderesponsavel < 18);
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        String cpfresponsavel = lerCpfCompleto(scanner, "CPF do responsável (formato XXX.XXX.XXX-XX): ");
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        System.out.print("Digite o gmail: ");
+                        String gmail = scanner.nextLine().trim();
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        System.out.print("Digite o telefone: ");
+                        String telefone = scanner.nextLine().trim();
+
+                        System.out.println("==============================================================================");
+
+                        // --- DADOS DA CRIANÇA ---
+                        String nomecrianca = lerNomeCompleto(scanner, "Nome completo da criança: ");
+
+                        int idadecrianca;
+                        do {
+                            System.out.print("Idade da criança: ");
+                            idadecrianca = scanner.nextInt();
                             scanner.nextLine();
+                            if (idadecrianca < 0 || idadecrianca > 17) {
+                                System.out.println("Idade inválida! Digite entre 0 e 17.");
+                            }
+                        } while (idadecrianca < 0 || idadecrianca > 17);
 
-                            String nomeAl = lerNomeCompleto(scanner, "Novo nome completo do aluno: ");
-                            String cpfAl = lerCpfCompleto(scanner, "Novo CPF do aluno (formato XXX.XXX.XXX-XX): ");
+                        String cpfcrianca = lerCpfCompleto(scanner, "CPF da criança (formato XXX.XXX.XXX-XX): ");
 
-                            int idade2;
-                            do {
-                                System.out.print("Nova idade do aluno: ");
-                                idade2 = scanner.nextInt();
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        // --- CURSO (escolha por menu) ---
+                        String curso = escolherCurso(scanner);
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        // --- TURNO (escolha por menu) ---
+                        String turno = escolherTurno(scanner);
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        // --- TURMA (gerada a partir do curso e turno) ---
+                        String turma = escolherTurma(scanner, turno, curso);
+
+                        System.out.println("------------------------------------------------------------------------------");
+
+                        System.out.print("Digite o gmail do aluno: ");
+                        String gmail2 = scanner.nextLine().trim();
+
+                        System.out.println("==============================================================================");
+
+                        // --- INSTANCIAÇÃO E SALVAMENTO ---
+                        Responsavel novoResp = new Responsavel(nomeresponsavel, cpfresponsavel, idaderesponsavel, gmail, telefone);
+                        bancoDados.inserirResponsavel(novoResp);
+
+                        Crianca novaCrianca = new Crianca(nomecrianca, cpfcrianca, idadecrianca, gmail2, turma, turno, curso, novoResp);
+                        bancoDados.inserirCrianca(novaCrianca);
+
+                        System.out.println("Nome do Aluno: " + novaCrianca);
+                        System.out.println("------------------------------------------------------------------------------");
+                        System.out.println("Nome do Responsável: " + novoResp);
+                        System.out.println("==============================================================================");
+                        System.out.println("\nAluno e Responsável cadastrados com sucesso!");
+                        break;
+
+                    case 2:
+                        System.out.println("==============================================================================");
+                        System.out.println("                ----- RESPONSÁVEIS POR ALUNO CADASTRADOS -----");
+                        bancoDados.exibirResponsaveisPorAluno();
+                        break;
+
+                    case 3:
+                        System.out.println("==============================================================================");
+                        System.out.println("                        ----- ALUNOS CADASTRADOS -----");
+                        bancoDados.exibirCriancas();
+                        break;
+
+                    case 4:
+                        System.out.println("==============================================================================");
+                        System.out.println("                        -----ATUALIZAR-----");
+                        System.out.println("1) Atualizar responsavel");
+                        System.out.println("2) Atualizar aluno");
+                        System.out.print("Escolha: ");
+
+                        int opcao3 = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (opcao3) {
+                            case 1:
+                                System.out.println("==============================================================================");
+                                System.out.println("                        ----- Atualizar responsavel -----");
+                                System.out.print("Digite a matricula do aluno vinculado ao responsavel: ");
+                                int idaluno = scanner.nextInt();
                                 scanner.nextLine();
-                                if (idade2 < 0 || idade2 > 17) {
-                                    System.out.println("Idade inválida! Digite entre 0 e 17.");
+
+                                String nomeResp = lerNomeCompleto(scanner, "Novo nome completo do responsável: ");
+                                String cpfRs = lerCpfCompleto(scanner, "Novo CPF do responsável (formato XXX.XXX.XXX-XX): ");
+
+                                int idade;
+                                do {
+                                    System.out.print("Nova idade do responsável: ");
+                                    idade = scanner.nextInt();
+                                    scanner.nextLine();
+                                    if (idade < 18) {
+                                        System.out.println("Responsável deve ter 18 anos ou mais.");
+                                    }
+                                } while (idade < 18);
+
+                                System.out.print("Novo Gmail: ");
+                                String novogmail = scanner.nextLine();
+
+                                System.out.print("Novo telefone: ");
+                                String novotelefone = scanner.nextLine();
+
+                                boolean atualizado = bancoDados.atualizarResponsavel(
+                                        idaluno, nomeResp, cpfRs, idade, novogmail, novotelefone);
+
+                                if (atualizado) {
+                                    System.out.println("Responsável atualizado com sucesso!");
+                                } else {
+                                    System.out.println("Aluno não encontrado ou sem responsável vinculado.");
                                 }
-                            } while (idade2 < 0 || idade2 > 17);
+                                break;
 
-                            System.out.print("Novo Gmail: ");
-                            String novogmail2 = scanner.nextLine();
+                            case 2:
+                                System.out.println("==============================================================================");
+                                System.out.println("                        ----- Atualizar aluno -----");
+                                System.out.print("Digite a matricula do aluno: ");
+                                int matriBusca2 = scanner.nextInt();
+                                scanner.nextLine();
 
-                            String novocurso = escolherCurso(scanner);
-                            String novoturno = escolherTurno(scanner);
-                            String novoturma = escolherTurma(scanner, novoturno, novocurso);
+                                String nomeAl = lerNomeCompleto(scanner, "Novo nome completo do aluno: ");
+                                String cpfAl = lerCpfCompleto(scanner, "Novo CPF do aluno (formato XXX.XXX.XXX-XX): ");
 
-                            boolean atualizado2 = bancoDados.atualizarAluno(
-                                idaluno2, nomeAl, cpfAl, idade2, novogmail2, novoturma, novoturno, novocurso);
+                                int idade2;
+                                do {
+                                    System.out.print("Nova idade do aluno: ");
+                                    idade2 = scanner.nextInt();
+                                    scanner.nextLine();
+                                    if (idade2 < 0 || idade2 > 17) {
+                                        System.out.println("Idade inválida! Digite entre 0 e 17.");
+                                    }
+                                } while (idade2 < 0 || idade2 > 17);
 
-                            if (atualizado2) {
-                                System.out.println("Aluno atualizado com sucesso!");
-                            } else {
-                                System.out.println("Aluno não encontrado.");
-                            }
-                            break;
-                            
-                        default:
-                            System.out.println("Opção inválida!");
-                            break;
-                    }
-                    break;
-                                        
-                case 5:
-                    System.out.println("==============================================================================");
-                    System.out.println("                        ----- PROCURAR ALUNOS -----");
-                    System.out.println("1) PROCURAR ALUNOS por CPF");
-                    System.out.println("2) PROCURAR ALUNOS por matricula");
-                    System.out.print("Escolha: ");
-                    
-                    int opcao2 = scanner.nextInt();
-                    scanner.nextLine();
+                                System.out.print("Novo Gmail: ");
+                                String novogmail2 = scanner.nextLine();
 
-                    switch (opcao2) {
-                        case 1:
-                            System.out.println("==============================================================================");
-                            System.out.println("                        ----- PROCURAR ALUNOS por CPF -----");
-                            System.out.print("Digite o CPF do aluno (formato XXX.XXX.XXX-XX): ");
-                            String cpfBusca = scanner.nextLine();
-                            System.out.println("------------------------------------------------------------------------------");
-                            bancoDados.buscarAlunoPorCpf(cpfBusca);
-                            break;
-                        case 2:
-                            System.out.println("==============================================================================");
-                            System.out.println("                        ----- PROCURAR ALUNOS por id -----");
-                            System.out.print("Digite a matricula do aluno para busca: ");
-                            int idBusca = scanner.nextInt();
-                            System.out.println("------------------------------------------------------------------------------");
-                            bancoDados.buscarAlunoPorid(idBusca);
-                            break;
-                        default:
-                            System.out.println("Opção inválida!");
-                            break;
-                    }
-                    break;
-                    
-                case 6:  
-                    System.out.println("==============================================================================");
-                    System.out.println("                        ----- Deletar -----");
-                    System.out.println("1) Excluir (essa opção irá excluir tudo relacionado a um cadastro, sem retorno)");
-                    System.out.println("------------------------------------------------------------------------------");
-                    System.out.println("2) Sair");
-                    System.out.println("------------------------------------------------------------------------------");
-                    System.out.print("Escolha: ");
+                                String novocurso = escolherCurso(scanner);
+                                String novoturno = escolherTurno(scanner);
+                                String novoturma = escolherTurma(scanner, novoturno, novocurso);
 
-                    int opcaodeletar = scanner.nextInt();
-                    scanner.nextLine();
-                    
-                    switch (opcaodeletar) {
-                        case 1:
-                            System.out.print("Digite a matricula do aluno que deseja excluir: ");
-                            int id = scanner.nextInt();
-                            if (bancoDados.excluirAluno(id)) {
-                                System.out.println("Aluno e responsável excluídos com sucesso!");
-                            } else {
-                                System.out.println("Aluno não encontrado.");
-                            }
-                            break;
-                        case 2:
-                            break;
-                    }
-                    break;
+                                boolean atualizado2 = bancoDados.atualizarAluno(
+                                        matriBusca2, nomeAl, cpfAl, idade2, novogmail2, novoturma, novoturno, novocurso);
 
-                default:
-                    System.out.println("Opção inválida!");
-                    break;                            
+                                if (atualizado2) {
+                                    System.out.println("Aluno atualizado com sucesso!");
+                                } else {
+                                    System.out.println("Aluno não encontrado.");
+                                }
+                                break;
+
+                            default:
+                                System.out.println("Opção inválida!");
+                                break;
+                        }
+                        break;
+
+                    case 5:
+                        System.out.println("==============================================================================");
+                        System.out.println("                        ----- PROCURAR ALUNOS -----");
+                        System.out.println("1) PROCURAR ALUNOS por CPF");
+                        System.out.println("2) PROCURAR ALUNOS por matricula");
+                        System.out.print("Escolha: ");
+
+                        int opcao2 = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (opcao2) {
+                            case 1:
+                                System.out.println("==============================================================================");
+                                System.out.println("                        ----- PROCURAR ALUNOS por CPF -----");
+                                System.out.print("Digite o CPF do aluno (formato XXX.XXX.XXX-XX): ");
+                                String cpfBusca = scanner.nextLine();
+                                System.out.println("------------------------------------------------------------------------------");
+                                bancoDados.buscarAlunoPorCpf(cpfBusca);
+                                break;
+                            case 2:
+                                System.out.println("==============================================================================");
+                                System.out.println("                        ----- PROCURAR ALUNOS por id -----");
+                                System.out.print("Digite a matricula do aluno para busca: ");
+                                int matriBusca = scanner.nextInt();
+                                System.out.println("------------------------------------------------------------------------------");
+                                bancoDados.buscarAlunoPorid(matriBusca);
+                                break;
+                            default:
+                                System.out.println("Opção inválida!");
+                                break;
+                        }
+                        break;
+
+                    case 6:
+                        System.out.println("==============================================================================");
+                        System.out.println("                        ----- Deletar -----");
+                        System.out.println("1) Excluir (essa opção irá excluir tudo relacionado a um cadastro, sem retorno)");
+                        System.out.println("------------------------------------------------------------------------------");
+                        System.out.println("2) Sair");
+                        System.out.println("------------------------------------------------------------------------------");
+                        System.out.print("Escolha: ");
+
+                        int opcaodeletar = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (opcaodeletar) {
+                            case 1:
+                                System.out.print("Digite a matricula do aluno que deseja excluir: ");
+                                int matri = scanner.nextInt();
+                                if (bancoDados.excluirAluno(matri)) {
+                                    System.out.println("Aluno e responsável excluídos com sucesso!");
+                                } else {
+                                    System.out.println("Aluno não encontrado.");
+                                }
+                                break;
+                            case 2:
+                                break;
+                        }
+                        break;
+
+                    default:
+                        System.out.println("Opção inválida!");
+                        break;
+                }
+            } catch (InputMismatchException erro) {
+                System.out.println("Opção inválida!");
+                scanner.next();//limpa buffer
             }
-        } 
-    } 
+        }
+
+    }
 
     // --- MÉTODOS AUXILIARES ---
-
     // Nome completo em campo único
     public static String lerNomeCompleto(Scanner sc, String msg) {
         String nome;
@@ -350,11 +358,16 @@ public class Cadastro {
         } while (opcao < 1 || opcao > 4);
 
         switch (opcao) {
-            case 1: return "Lógica de Programação: Criando Meu Primeiro Jogo";
-            case 2: return "Robótica Educativa: Programando no Mundo Real";
-            case 3: return "Criatividade Digital com Minecraft: Criar e Explorar";
-            case 4: return "Segurança em Redes: Usar a Internet com Segurança";
-            default: return "";
+            case 1:
+                return "Lógica de Programação: Criando Meu Primeiro Jogo";
+            case 2:
+                return "Robótica Educativa: Programando no Mundo Real";
+            case 3:
+                return "Criatividade Digital com Minecraft: Criar e Explorar";
+            case 4:
+                return "Segurança em Redes: Usar a Internet com Segurança";
+            default:
+                return "";
         }
     }
 
@@ -363,19 +376,32 @@ public class Cadastro {
         // Prefixo do turno
         String prefixoTurno;
         switch (turno) {
-            case "Matutino":    prefixoTurno = "M"; break;
-            case "Vespertino":  prefixoTurno = "V"; break;
-            case "Noturno":     prefixoTurno = "N"; break;
-            default:            prefixoTurno = "X";
+            case "Matutino":
+                prefixoTurno = "M";
+                break;
+            case "Vespertino":
+                prefixoTurno = "V";
+                break;
+            case "Noturno":
+                prefixoTurno = "N";
+                break;
+            default:
+                prefixoTurno = "X";
         }
 
         // Prefixo do curso
         String prefixoCurso;
-        if      (curso.startsWith("Lógica"))      prefixoCurso = "LP";
-        else if (curso.startsWith("Robótica"))    prefixoCurso = "RE";
-        else if (curso.startsWith("Criatividade")) prefixoCurso = "MC";
-        else if (curso.startsWith("Segurança"))   prefixoCurso = "SR";
-        else                                       prefixoCurso = "XX";
+        if (curso.startsWith("Lógica")) {
+            prefixoCurso = "LP";
+        } else if (curso.startsWith("Robótica")) {
+            prefixoCurso = "RE";
+        } else if (curso.startsWith("Criatividade")) {
+            prefixoCurso = "MC";
+        } else if (curso.startsWith("Segurança")) {
+            prefixoCurso = "SR";
+        } else {
+            prefixoCurso = "XX";
+        }
 
         // Gera turmas: ex. M-LP-1, M-LP-2
         String[] turmas = {
@@ -420,10 +446,14 @@ public class Cadastro {
         } while (opcao < 1 || opcao > 3);
 
         switch (opcao) {
-            case 1: return "Matutino";
-            case 2: return "Vespertino";
-            case 3: return "Noturno";
-            default: return "";
+            case 1:
+                return "Matutino";
+            case 2:
+                return "Vespertino";
+            case 3:
+                return "Noturno";
+            default:
+                return "";
         }
     }
 
